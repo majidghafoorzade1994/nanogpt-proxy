@@ -1,8 +1,10 @@
 services:
   nanogpt-proxy:
     build: .
-    ports:
-      - "8080:8080"
+    # No host port binding: Dokploy's Traefik routes to the container port.
+    # For plain local use, swap this for: ports: ["8080:8080"]
+    expose:
+      - "8080"
     environment:
       TARGET_URL: https://nano-gpt.com
     restart: unless-stopped
